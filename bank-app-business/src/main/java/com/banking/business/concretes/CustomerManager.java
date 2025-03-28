@@ -2,7 +2,7 @@ package com.banking.business.concretes;
 
 import com.banking.business.abstracts.CustomerService;
 import com.banking.business.constants.CustomerConstants;
-import com.banking.core.exceptions.BusinessException;
+import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.entities.Customer;
 import com.banking.repositories.abstracts.CustomerRepository;
 import lombok.RequiredArgsConstructor;

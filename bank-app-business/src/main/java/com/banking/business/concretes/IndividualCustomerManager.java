@@ -7,7 +7,7 @@ import com.banking.business.dtos.requests.individual.CreateIndividualCustomerReq
 import com.banking.business.dtos.responses.individual.IndividualCustomerResponse;
 import com.banking.business.mappings.IndividualCustomerMapper;
 import com.banking.business.rules.IndividualCustomerBusinessRules;
-import com.banking.core.exceptions.BusinessException;
+import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.entities.IndividualCustomer;
 import com.banking.repositories.abstracts.IndividualCustomerRepository;
 import lombok.RequiredArgsConstructor;

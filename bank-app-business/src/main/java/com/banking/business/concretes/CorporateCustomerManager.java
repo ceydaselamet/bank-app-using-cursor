@@ -7,7 +7,7 @@ import com.banking.business.dtos.requests.corporate.CreateCorporateCustomerReque
 import com.banking.business.dtos.responses.corporate.CorporateCustomerResponse;
 import com.banking.business.mappings.CorporateCustomerMapper;
 import com.banking.business.rules.CorporateCustomerBusinessRules;
-import com.banking.core.exceptions.BusinessException;
+import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.entities.CorporateCustomer;
 import com.banking.repositories.abstracts.CorporateCustomerRepository;
 import lombok.RequiredArgsConstructor;

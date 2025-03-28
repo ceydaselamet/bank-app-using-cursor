@@ -1,6 +1,6 @@
 package com.banking.business.rules;
 
-import com.banking.core.exceptions.BusinessException;
+import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.repositories.abstracts.IndividualCustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -12,6 +12,8 @@ public interface CorporateCustomerRepository extends BaseRepository<CorporateCus
     Optional<CorporateCustomer> findByTaxNumber(String taxNumber);
     
     boolean existsByTaxNumber(String taxNumber);
+    boolean existsByEmail(String email);
+    boolean existsByCustomerNumber(String customerNumber);
     
     List<CorporateCustomer> findByTaxOffice(String taxOffice);
     

@@ -12,6 +12,19 @@ public interface IndividualCustomerRepository extends BaseRepository<IndividualC
     Optional<IndividualCustomer> findByNationalId(String nationalId);
     
     boolean existsByNationalId(String nationalId);
+    boolean existsByEmail(String email);
+    boolean existsByCustomerNumber(String customerNumber);
+    
+    List<IndividualCustomer> findByCity(String city);
+    
+    @Query("SELECT ic FROM IndividualCustomer ic WHERE ic.monthlyIncome >= :minIncome")
+    List<IndividualCustomer> findCustomersWithMinMonthlyIncome(@Param("minIncome") Double minIncome);
+    
+    @Query("SELECT ic FROM IndividualCustomer ic WHERE ic.age >= :minAge AND ic.creditScore >= :minScore")
+    List<IndividualCustomer> findByAgeAndCreditScore(
+            @Param("minAge") Integer minAge,
+            @Param("minScore") Integer minScore
+    );
     
     @Query("SELECT ic FROM IndividualCustomer ic WHERE ic.creditScore >= :minScore")
     List<IndividualCustomer> findCustomersWithMinCreditScore(@Param("minScore") Integer minScore);
