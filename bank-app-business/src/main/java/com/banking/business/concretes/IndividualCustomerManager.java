@@ -2,7 +2,9 @@ package com.banking.business.concretes;
 
 import com.banking.business.abstracts.CustomerService;
 import com.banking.business.abstracts.IndividualCustomerService;
-import com.banking.business.constants.CustomerConstants;
+import com.banking.business.constants.Messages.ValidationMessages;
+import com.banking.business.constants.Messages.CustomerFormat;
+import com.banking.business.constants.Messages.CreditScoring;
 import com.banking.business.dtos.requests.individual.CreateIndividualCustomerRequest;
 import com.banking.business.dtos.responses.individual.IndividualCustomerResponse;
 import com.banking.business.mappings.IndividualCustomerMapper;
@@ -35,7 +37,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
         rules.checkMinimumAge(calculateAge(request.getBirthDate()));
 
         IndividualCustomer customer = mapper.createRequestToEntity(request);
-        customer.setCustomerNumber(customerService.generateCustomerNumber(CustomerConstants.INDIVIDUAL_CUSTOMER_PREFIX));
+        customer.setCustomerNumber(customerService.generateCustomerNumber(CustomerFormat.INDIVIDUAL_PREFIX));
         customer.setCreditScore(generateInitialCreditScore());
 
         IndividualCustomer savedCustomer = individualCustomerRepository.save(customer);
@@ -45,14 +47,14 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     @Override
     public IndividualCustomerResponse getById(Long id) {
         IndividualCustomer customer = individualCustomerRepository.findById(id)
-                .orElseThrow(() -> new BusinessException(CustomerConstants.INDIVIDUAL_CUSTOMER_NOT_FOUND));
+                .orElseThrow(() -> new BusinessException(ValidationMessages.INDIVIDUAL_CUSTOMER_NOT_FOUND));
         return mapper.entityToResponse(customer);
     }
 
     @Override
     public IndividualCustomerResponse getByNationalId(String nationalId) {
         IndividualCustomer customer = individualCustomerRepository.findByNationalId(nationalId)
-                .orElseThrow(() -> new BusinessException(CustomerConstants.INDIVIDUAL_CUSTOMER_NOT_FOUND));
+                .orElseThrow(() -> new BusinessException(ValidationMessages.INDIVIDUAL_CUSTOMER_NOT_FOUND));
         return mapper.entityToResponse(customer);
     }
 
@@ -89,7 +91,7 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     }
 
     private int generateInitialCreditScore() {
-        return CustomerConstants.MIN_CREDIT_SCORE + 
-               (int) (Math.random() * (CustomerConstants.GOOD_CREDIT_SCORE - CustomerConstants.MIN_CREDIT_SCORE));
+        return CreditScoring.MIN_SCORE + 
+               (int) (Math.random() * (CreditScoring.GOOD_SCORE - CreditScoring.MIN_SCORE));
     }
 } 

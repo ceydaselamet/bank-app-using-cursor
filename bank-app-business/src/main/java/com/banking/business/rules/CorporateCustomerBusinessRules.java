@@ -1,5 +1,7 @@
 package com.banking.business.rules;
 
+import com.banking.business.constants.Messages.BusinessMessages;
+import com.banking.business.constants.Messages.BusinessRules;
 import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.repositories.abstracts.CorporateCustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,31 +15,31 @@ public class CorporateCustomerBusinessRules {
 
     public void checkIfTaxNumberExists(String taxNumber) {
         if (corporateCustomerRepository.existsByTaxNumber(taxNumber)) {
-            throw new BusinessException("Corporate customer with this tax number already exists");
+            throw new BusinessException(BusinessMessages.Corporate.TAX_NUMBER_EXISTS);
         }
     }
 
     public void checkIfEmailExists(String email) {
         if (corporateCustomerRepository.existsByEmail(email)) {
-            throw new BusinessException("Customer with this email already exists");
+            throw new BusinessException(BusinessMessages.Common.EMAIL_EXISTS);
         }
     }
 
     public void checkIfCustomerNumberExists(String customerNumber) {
         if (corporateCustomerRepository.existsByCustomerNumber(customerNumber)) {
-            throw new BusinessException("Customer with this customer number already exists");
+            throw new BusinessException(BusinessMessages.Common.CUSTOMER_NUMBER_EXISTS);
         }
     }
 
     public void checkMinimumCompanyAge(int years) {
-        if (years < 2) {
-            throw new BusinessException("Company must be at least 2 years old");
+        if (years < BusinessRules.MINIMUM_COMPANY_AGE) {
+            throw new BusinessException(BusinessMessages.Corporate.MINIMUM_COMPANY_AGE);
         }
     }
 
     public void checkMinimumAnnualRevenue(Double annualRevenue) {
-        if (annualRevenue < 1_000_000) {
-            throw new BusinessException("Company must have minimum 1,000,000 annual revenue");
+        if (annualRevenue < BusinessRules.MINIMUM_ANNUAL_REVENUE) {
+            throw new BusinessException(BusinessMessages.Corporate.MINIMUM_ANNUAL_REVENUE);
         }
     }
 } 

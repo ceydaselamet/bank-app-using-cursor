@@ -1,5 +1,7 @@
 package com.banking.business.rules;
 
+import com.banking.business.constants.Messages.BusinessMessages;
+import com.banking.business.constants.Messages.BusinessRules;
 import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.repositories.abstracts.IndividualCustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,25 +15,25 @@ public class IndividualCustomerBusinessRules {
 
     public void checkIfNationalIdExists(String nationalId) {
         if (individualCustomerRepository.existsByNationalId(nationalId)) {
-            throw new BusinessException("Individual customer with this national ID already exists");
+            throw new BusinessException(BusinessMessages.Individual.NATIONAL_ID_EXISTS);
         }
     }
 
     public void checkIfEmailExists(String email) {
         if (individualCustomerRepository.existsByEmail(email)) {
-            throw new BusinessException("Customer with this email already exists");
+            throw new BusinessException(BusinessMessages.Common.EMAIL_EXISTS);
         }
     }
 
     public void checkIfCustomerNumberExists(String customerNumber) {
         if (individualCustomerRepository.existsByCustomerNumber(customerNumber)) {
-            throw new BusinessException("Customer with this customer number already exists");
+            throw new BusinessException(BusinessMessages.Common.CUSTOMER_NUMBER_EXISTS);
         }
     }
 
     public void checkMinimumAge(int age) {
-        if (age < 18) {
-            throw new BusinessException("Customer must be at least 18 years old");
+        if (age < BusinessRules.MINIMUM_INDIVIDUAL_AGE) {
+            throw new BusinessException(BusinessMessages.Individual.MINIMUM_AGE_NOT_MET);
         }
     }
 } 

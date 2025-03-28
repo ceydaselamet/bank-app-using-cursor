@@ -1,7 +1,8 @@
 package com.banking.business.concretes;
 
 import com.banking.business.abstracts.CustomerService;
-import com.banking.business.constants.CustomerConstants;
+import com.banking.business.constants.Messages.ValidationMessages;
+import com.banking.business.constants.Messages.CustomerFormat;
 import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.entities.Customer;
 import com.banking.repositories.abstracts.CustomerRepository;
@@ -41,7 +42,7 @@ public class CustomerManager implements CustomerService {
         String customerNumber;
         do {
             StringBuilder number = new StringBuilder(prefix);
-            for (int i = 0; i < CustomerConstants.CUSTOMER_NUMBER_LENGTH - 1; i++) {
+            for (int i = 0; i < CustomerFormat.NUMBER_LENGTH - 1; i++) {
                 number.append(random.nextInt(10));
             }
             customerNumber = number.toString();
@@ -53,7 +54,7 @@ public class CustomerManager implements CustomerService {
     @Override
     public void checkIfCustomerExists(Long id) {
         if (!customerRepository.existsById(id)) {
-            throw new BusinessException(CustomerConstants.CUSTOMER_NOT_FOUND);
+            throw new BusinessException(ValidationMessages.CUSTOMER_NOT_FOUND);
         }
     }
 } 
