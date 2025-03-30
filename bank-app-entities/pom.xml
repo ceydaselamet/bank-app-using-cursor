@@ -21,6 +21,7 @@
         <dependency>
             <groupId>com.banking</groupId>
             <artifactId>bank-app-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- JPA -->

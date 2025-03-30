@@ -67,4 +67,19 @@ public final class Messages {
         public static final String RATING_C = "C";
         public static final String RATING_D = "D";
     }
+
+    public static class LoanType {
+        public static final String NOT_FOUND = "Loan type not found";
+        public static final String PARENT_NOT_FOUND = "Parent loan type not found";
+        public static final String INVALID_AMOUNT_RANGE = "Minimum amount cannot be greater than maximum amount";
+        public static final String INVALID_TERM_RANGE = "Minimum term cannot be greater than maximum term";
+    }
+
+    public static class LoanApplication {
+        public static final String NOT_FOUND = "Loan application not found";
+        public static final String INVALID_AMOUNT = "Loan amount must be between minimum and maximum amount";
+        public static final String INVALID_TERM = "Loan term must be between minimum and maximum term";
+        public static final String INVALID_CUSTOMER_TYPE = "Customer type does not match loan type";
+        public static final String ALREADY_PROCESSED = "Loan application has already been processed";
+    }
 } 
