@@ -3,6 +3,8 @@ package com.banking.webapi.controllers;
 import com.banking.business.abstracts.IndividualCustomerService;
 import com.banking.business.dtos.requests.individual.CreateIndividualCustomerRequest;
 import com.banking.business.dtos.responses.individual.IndividualCustomerResponse;
+import com.banking.core.utils.paging.PageDto;
+import com.banking.core.utils.paging.PageRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -43,6 +45,12 @@ public class IndividualCustomersController {
     @Operation(summary = "Get all individual customers")
     public List<IndividualCustomerResponse> getAll() {
         return individualCustomerService.getAll();
+    }
+
+    @GetMapping("/paginated")
+    @Operation(summary = "Get all individual customers with pagination")
+    public PageDto<IndividualCustomerResponse> getAllPaginated(@Valid PageRequest pageRequest) {
+        return PageDto.of(individualCustomerService.getAllPaginated(pageRequest.toPageable()));
     }
 
     @GetMapping("/by-min-credit-score/{minScore}")

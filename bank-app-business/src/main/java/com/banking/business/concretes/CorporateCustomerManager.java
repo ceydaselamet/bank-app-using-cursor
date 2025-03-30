@@ -13,6 +13,8 @@ import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.entities.CorporateCustomer;
 import com.banking.repositories.abstracts.CorporateCustomerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -92,6 +94,12 @@ public class CorporateCustomerManager implements CorporateCustomerService {
     public void delete(Long id) {
         customerService.checkIfCustomerExists(id);
         corporateCustomerRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<CorporateCustomerResponse> getAllPaginated(Pageable pageable) {
+        return corporateCustomerRepository.findAll(pageable)
+                .map(mapper::entityToResponse);
     }
 
     private int calculateCompanyAge(LocalDate establishmentDate) {

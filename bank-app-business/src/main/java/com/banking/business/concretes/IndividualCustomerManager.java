@@ -13,6 +13,8 @@ import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
 import com.banking.entities.IndividualCustomer;
 import com.banking.repositories.abstracts.IndividualCustomerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,6 +86,12 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     public void delete(Long id) {
         customerService.checkIfCustomerExists(id);
         individualCustomerRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<IndividualCustomerResponse> getAllPaginated(Pageable pageable) {
+        return individualCustomerRepository.findAll(pageable)
+                .map(mapper::entityToResponse);
     }
 
     private int calculateAge(LocalDate birthDate) {

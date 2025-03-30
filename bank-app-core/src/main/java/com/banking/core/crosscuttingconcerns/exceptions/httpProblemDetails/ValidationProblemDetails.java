@@ -1,9 +1,7 @@
 package com.banking.core.crosscuttingconcerns.exceptions.httpProblemDetails;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
