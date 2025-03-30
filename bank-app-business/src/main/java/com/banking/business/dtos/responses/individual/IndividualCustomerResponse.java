@@ -1,6 +1,7 @@
 package com.banking.business.dtos.responses.individual;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class IndividualCustomerResponse {
     private Long id;
     private String customerNumber;
@@ -22,7 +24,8 @@ public class IndividualCustomerResponse {
     private LocalDate birthDate;
     private Double monthlyIncome;
     private Integer creditScore;
-    private boolean isActive;
+    private boolean active;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
+    private String city;
 } 
