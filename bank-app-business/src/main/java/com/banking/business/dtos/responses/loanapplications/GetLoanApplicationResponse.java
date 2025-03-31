@@ -13,17 +13,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class GetLoanApplicationResponse {
     private Long id;
-    private Long loanTypeId;
-    private String loanTypeName;
     private Long customerId;
     private String customerName;
+    private String customerNumber;
+    private Long loanTypeId;
+    private String loanTypeName;
     private BigDecimal amount;
     private Integer term;
     private BigDecimal interestRate;
-    private LoanApplicationStatus status;
-    private String rejectionReason;
     private BigDecimal monthlyPayment;
     private BigDecimal totalPayment;
-    private LocalDateTime applicationDate;
+    private LoanApplicationStatus status;
     private LocalDateTime decisionDate;
+    private String rejectionReason;
+    private LocalDateTime createdAt;
 } 

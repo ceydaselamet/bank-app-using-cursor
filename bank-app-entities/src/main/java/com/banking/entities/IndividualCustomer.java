@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -27,6 +28,9 @@ public class IndividualCustomer extends Customer {
 
     @Column(name = "monthly_income", nullable = false)
     private Double monthlyIncome;
+
+    @Column(name = "current_debt")
+    private BigDecimal currentDebt;
 
     @Column(name = "credit_score")
     private Integer creditScore;

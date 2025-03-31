@@ -10,6 +10,7 @@ import com.banking.business.dtos.responses.individual.IndividualCustomerResponse
 import com.banking.business.mappings.IndividualCustomerMapper;
 import com.banking.business.rules.IndividualCustomerBusinessRules;
 import com.banking.core.crosscuttingconcerns.exceptions.types.BusinessException;
+import com.banking.core.utils.paging.PageDto;
 import com.banking.entities.IndividualCustomer;
 import com.banking.repositories.abstracts.IndividualCustomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -89,9 +90,10 @@ public class IndividualCustomerManager implements IndividualCustomerService {
     }
 
     @Override
-    public Page<IndividualCustomerResponse> getAllPaginated(Pageable pageable) {
-        return individualCustomerRepository.findAll(pageable)
+    public PageDto<IndividualCustomerResponse> getAllPaginated(Pageable pageable) {
+        Page<IndividualCustomerResponse> page = individualCustomerRepository.findAll(pageable)
                 .map(mapper::entityToResponse);
+        return PageDto.of(page);
     }
 
     private int calculateAge(LocalDate birthDate) {

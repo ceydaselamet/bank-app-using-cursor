@@ -50,7 +50,7 @@ public class IndividualCustomersController {
     @GetMapping("/paginated")
     @Operation(summary = "Get all individual customers with pagination")
     public PageDto<IndividualCustomerResponse> getAllPaginated(@Valid PageRequest pageRequest) {
-        return PageDto.of(individualCustomerService.getAllPaginated(pageRequest.toPageable()));
+        return individualCustomerService.getAllPaginated(pageRequest.toPageable());
     }
 
     @GetMapping("/by-min-credit-score/{minScore}")

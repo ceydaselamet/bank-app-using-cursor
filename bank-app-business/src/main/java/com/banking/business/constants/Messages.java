@@ -77,9 +77,32 @@ public final class Messages {
 
     public static class LoanApplication {
         public static final String NOT_FOUND = "Loan application not found";
-        public static final String INVALID_AMOUNT = "Loan amount must be between minimum and maximum amount";
-        public static final String INVALID_TERM = "Loan term must be between minimum and maximum term";
+        public static final String INVALID_AMOUNT = "Invalid loan amount";
+        public static final String INVALID_TERM = "Invalid loan term";
         public static final String INVALID_CUSTOMER_TYPE = "Customer type does not match loan type";
-        public static final String ALREADY_PROCESSED = "Loan application has already been processed";
+        public static final String INSUFFICIENT_CREDIT_SCORE = "Insufficient credit score";
+        public static final String EXCEEDS_DEBT_TO_INCOME_RATIO = "Debt to income ratio exceeds maximum limit";
+        public static final String INSUFFICIENT_BUSINESS_HISTORY = "Insufficient years in business";
+        public static final String INSUFFICIENT_ANNUAL_REVENUE = "Insufficient annual revenue";
+        public static final String ALREADY_PROCESSED = "Loan application already processed";
+    }
+
+    public static final class User {
+        private User() {}
+
+        public static final String NOT_FOUND = "User not found";
+        public static final String NOT_FOUND_BY_ID = "User not found with id: %d";
+        public static final String NOT_FOUND_BY_USERNAME = "User not found with username: %s";
+        public static final String INCORRECT_PASSWORD = "Current password is incorrect";
+    }
+
+    public static final class Auth {
+        private Auth() {}
+
+        public static final String USERNAME_TAKEN = "Username is already taken";
+        public static final String EMAIL_TAKEN = "Email is already in use";
+        public static final String DEFAULT_ROLE_NOT_FOUND = "Default role not found";
+        public static final String INVALID_PASSWORD = "Password must be at least 6 characters";
+        public static final String INVALID_EMAIL = "Invalid email format";
     }
 } 

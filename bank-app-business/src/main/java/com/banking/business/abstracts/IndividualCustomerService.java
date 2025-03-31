@@ -2,8 +2,9 @@ package com.banking.business.abstracts;
 
 import com.banking.business.dtos.requests.individual.CreateIndividualCustomerRequest;
 import com.banking.business.dtos.responses.individual.IndividualCustomerResponse;
-import org.springframework.data.domain.Page;
+import com.banking.core.utils.paging.PageDto;
 import org.springframework.data.domain.Pageable;
+
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface IndividualCustomerService {
     List<IndividualCustomerResponse> getAllByMinCreditScore(Integer minScore);
     List<IndividualCustomerResponse> getAllByIncomeRange(Double minIncome, Double maxIncome);
     void delete(Long id);
-    Page<IndividualCustomerResponse> getAllPaginated(Pageable pageable);
+    PageDto<IndividualCustomerResponse> getAllPaginated(Pageable pageable);
 } 

@@ -4,13 +4,13 @@ import com.banking.business.abstracts.LoanApplicationService;
 import com.banking.business.dtos.requests.loanapplications.CreateLoanApplicationRequest;
 import com.banking.business.dtos.responses.loanapplications.GetLoanApplicationResponse;
 import com.banking.core.utils.paging.PageDto;
+import com.banking.core.utils.paging.PageRequest;
 import com.banking.enums.LoanApplicationStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,48 +21,49 @@ import java.util.List;
 @AllArgsConstructor
 @Tag(name = "Loan Applications", description = "Loan Application Management APIs")
 public class LoanApplicationsController {
-    private final LoanApplicationService service;
+    private final LoanApplicationService loanApplicationService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new loan application")
     public GetLoanApplicationResponse create(@Valid @RequestBody CreateLoanApplicationRequest request) {
-        return service.create(request);
+        return loanApplicationService.create(request);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get loan application by ID")
+    @Operation(summary = "Get a loan application by ID")
     public GetLoanApplicationResponse getById(@PathVariable Long id) {
-        return service.getById(id);
+        return loanApplicationService.getById(id);
     }
 
     @GetMapping("/by-customer")
-    @Operation(summary = "Get loan applications by customer ID and status")
+    @Operation(summary = "Get loan applications by customer ID and optional status")
     public List<GetLoanApplicationResponse> getByCustomerIdAndStatus(
             @RequestParam Long customerId,
+            @Parameter(description = "Filter by application status (optional)") 
             @RequestParam(required = false) LoanApplicationStatus status) {
-        return service.getByCustomerIdAndStatus(customerId, status);
+        return loanApplicationService.getByCustomerIdAndStatus(customerId, status);
     }
 
     @GetMapping("/by-customer/paginated")
     @Operation(summary = "Get paginated loan applications by customer ID")
     public PageDto<GetLoanApplicationResponse> getByCustomerId(
             @RequestParam Long customerId,
-            @Parameter(hidden = true) Pageable pageable) {
-        return service.getByCustomerId(customerId, pageable);
+            @Valid PageRequest pageRequest) {
+        return loanApplicationService.getByCustomerId(customerId, pageRequest.toPageable());
     }
 
     @PutMapping("/{id}/approve")
-    @Operation(summary = "Approve loan application")
+    @Operation(summary = "Approve a loan application")
     public GetLoanApplicationResponse approve(@PathVariable Long id) {
-        return service.approve(id);
+        return loanApplicationService.approve(id);
     }
 
     @PutMapping("/{id}/reject")
-    @Operation(summary = "Reject loan application")
+    @Operation(summary = "Reject a loan application")
     public GetLoanApplicationResponse reject(
             @PathVariable Long id,
             @RequestParam String reason) {
-        return service.reject(id, reason);
+        return loanApplicationService.reject(id, reason);
     }
 } 

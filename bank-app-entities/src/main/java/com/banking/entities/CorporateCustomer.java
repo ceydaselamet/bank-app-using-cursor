@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -25,8 +26,8 @@ public class CorporateCustomer extends Customer {
     @Column(name = "establishment_date")
     private LocalDate establishmentDate;
 
-    @Column(name = "annual_revenue")
-    private Double annualRevenue;
+    @Column(name = "annual_revenue", nullable = false)
+    private BigDecimal annualRevenue;
 
     @Column(name = "company_size")
     private Integer companySize;
